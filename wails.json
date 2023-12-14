@@ -1,0 +1,20 @@
+{
+  "$schema": "https://wails.io/schemas/config.v2.json",
+  "name": "NatDetectionGUI",
+  "outputfilename": "NatDetectionGUI",
+  "frontend:install": "npm install",
+  "frontend:build": "npm run build",
+  "frontend:dev:watcher": "npm run dev",
+  "frontend:dev:serverUrl": "auto",
+  "author": {
+    "name": "Bojin Li",
+    "email": "bojinxx@gmail.com"
+  },
+  "info": {
+    "companyName": "Bojin Li",
+    "productName": "NAT Type Detection",
+    "productVersion": "1.0.0",
+    "copyright": "Copyright © 2023 Bojin Li. All rights reserved.",
+    "comments": "Awesome tool to detect your NAT type."
+  }
+}
