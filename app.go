@@ -77,10 +77,31 @@ func (a *App) GetAllIPv4Interfaces() []string {
 			case *net.IPAddr:
 				ip = v.IP
 			}
-			if ip.To4() != nil && ip.String() != "127.0.0.1" {
+			// Check if the IP is an IPv4 address and not in the excluded ranges
+			if ip.To4() != nil && !isExcludedIPv4(ip.To4()) {
 				ipv4Addrs = append(ipv4Addrs, ip.String())
 			}
 		}
 	}
 	return ipv4Addrs
+}
+
+// isExcludedIPv4 checks if the IP address falls into excluded ranges
+func isExcludedIPv4(ip net.IP) bool {
+	// Local loopback range (127.0.0.0/8)
+	if ip[0] == 127 {
+		return true
+	}
+
+	// Link-local range (169.254.0.0/16)
+	if ip[0] == 169 && ip[1] == 254 {
+		return true
+	}
+
+	// Unspecified address (0.0.0.0)
+	if ip.Equal(net.IPv4zero) {
+		return true
+	}
+
+	return false
 }
